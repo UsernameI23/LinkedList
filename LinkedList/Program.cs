@@ -1,59 +1,49 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 public class Example
 {
     public static void Main()
     {
-        // Create the link list.
-        string[] friends =
-            { "Mickey", "Minnie", "Donald", "Pluto", "Goofy", "Daisy" };
-        LinkedList<string> friendList = new LinkedList<string>(friends);
-        Console.WriteLine("Original friend list");
-        foreach (string friend in friendList)
+       
+        string[] members =
+            { "Kate", "Jane", "Sarah", "Lily", "April", "Hannah" };
+        LinkedList<string> memberList = new LinkedList<string>(members);
+        Console.WriteLine("Original member list");
+        foreach (string member in memberList)
         {
-            Console.WriteLine(friend);
+            Console.WriteLine(member);
         }
         Console.WriteLine();
 
-        friendList.AddLast("Clarabell");
-        friendList.AddFirst("Scrooge");
 
-        //Retrieving the node associated wtih Donald
-        LinkedListNode<string> targetLocation = friendList.Find("Donald");
-        //Using the Next property of LinkedListNode < T > to display the value of the next friend
-        Console.WriteLine("The current friend in the list after Donald is {0}", targetLocation.Next.Value);
-        Console.WriteLine();
-        friendList.AddAfter(targetLocation, "Pete");
-        friendList.AddBefore(targetLocation, "Hewey");
-        Console.WriteLine("List with additions");
-        foreach (string friend in friendList)
-        {
-            Console.WriteLine(friend);
-        }
-        Console.WriteLine();
-        friendList.RemoveFirst();
-        friendList.RemoveLast();
-        Console.WriteLine("List after deletions");
-        foreach (string friend in friendList)
-        {
-            Console.WriteLine(friend);
-        }
-        Console.WriteLine();
+        
+        LinkedListNode<string> targetLocation = memberList.Find("Kate");
+        Console.WriteLine($"First Member of the list is {members[0]}");
+        LinkedListNode<string> targetLocation2 = memberList.FindLast("Hannah");
+        Console.WriteLine($"Last Member of the list is {members[5]}");
 
-        // Create an array with the same number of
-        // elements as the linked list.
-        string[] friendArray = new string[friendList.Count];
-        friendList.CopyTo(friendArray, 0);
-        Console.WriteLine("friendList is now friendArray");
-        foreach (string f in friendArray)
+        memberList.AddAfter(targetLocation, "Paul");
+        memberList.Remove("Jane");
+
+        //memberList.AddAfter(targetLocation2, "Anna");
+        //memberList.Remove("Jane");
+        Console.WriteLine();
+        Console.WriteLine($"Here are the available members: {members.Count()}");
+
+
+        string[] memberArray = new string[memberList.Count];
+        memberList.CopyTo(memberArray, 0);
+
+       
+
+        Console.WriteLine("Here are the changes to the List");
+        foreach (string f in memberArray)
         {
             Console.WriteLine(f);
         }
 
-        // Release all the nodes.
-        friendList.Clear();
+        
+        memberList.Clear();
 
 
     }
